@@ -137,7 +137,7 @@ void Dungeon::handleEnemyRoom(Room * room)
         int input;
         cin >> input;
         if (input == 1)
-            handleFightActions(&enemy);
+            {handleFightActions(&enemy); return;}
         else if (input == 2)
         {
             player.changesRooms(player.previousRoom);
@@ -161,6 +161,7 @@ void Dungeon::enterRoom(Room *room)
         handleEmptyRoom(room);
 }
 
+// 处理房间移动
 void Dungeon::handleMovementActions(Room * room)
 {
     while (true)
