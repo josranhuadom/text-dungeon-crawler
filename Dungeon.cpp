@@ -8,21 +8,21 @@ Dungeon::Dungeon(Player p)
     player = p;
 }
 
-/* æ˜¾ç¤ºé€‰é¡¹ */
+/* ÏÔÊ¾Ñ¡Ïî */
 void Dungeon::printActions(int numActions, string actions[])
 {
-    cout << "æ¥ä¸‹æ¥è¦åšä»€ä¹ˆï¼Ÿï¼ˆè¾“å…¥æ•°å­—ï¼‰\n";
+    cout << "½ÓÏÂÀ´Òª×öÊ²Ã´£¿£¨ÊäÈëÊı×Ö£©\n";
     for(int i = 0; i < numActions; i++)
     {
         cout << actions[i] << "\n";
     }
 }
 
-/* ç©ºæˆ¿é—´çš„å¤„ç†ä»£ç  */
+/* ¿Õ·¿¼äµÄ´¦Àí´úÂë */
 void Dungeon::handleEmptyRoom(Room *room)
 {
-    cout << "ä½ è¿›äº†ä¸€ä¸ªç©ºæˆ¿é—´ã€‚\n";
-    string actions[] = {"1ã€ç§»åŠ¨åˆ°å…¶ä»–æˆ¿é—´"};
+    cout << "Äã½øÁËÒ»¸ö¿Õ·¿¼ä¡£\n";
+    string actions[] = {"1¡¢ÒÆ¶¯µ½ÆäËû·¿¼ä"};
     while(true)
     {
         printActions(1, actions);
@@ -31,31 +31,31 @@ void Dungeon::handleEmptyRoom(Room *room)
         if (input == "1")
             return;
         else
-            cout << "ä½ è¾“å…¥ä½ ğŸå‘¢ï¼Œå†è¾“å…¥ä¸€é\n";
+            cout << "ÄãÊäÈëÄã?ÄØ£¬ÔÙÊäÈëÒ»±é\n";
     }
 }
 
-/* å®è—æˆ¿é—´çš„å¤„ç†ä»£ç  */
+/* ±¦²Ø·¿¼äµÄ´¦Àí´úÂë */
 void Dungeon::handleLootActions(Room * room)
 { 
     player.lootRoom(room);
     
-    for(int i = 0; i < room->items.size(); i++);
+    for(int i = 0; i < room->items.size(); i++)
     {
-        cout << "ç®±å­é‡Œé¢æ˜¯â€¦â€¦\n" << room -> items.front().name << "ï¼" << endl;
+        cout << "±¦ÏäÀïÃæµÄÊÇ¡­¡­\n" << room -> items.front().name << "£¡\n";
         cout << 
-        "ç°åœ¨ç”Ÿå‘½å€¼æ˜¯" << player.currentHealth << 
-        "ç‚¹ï¼Œæ”»å‡»åŠ›æ˜¯ï¼š" << player.attack <<
-        "ç‚¹ï¼Œé˜²å¾¡åŠ›æ˜¯ï¼š" << player.defense << endl;
+        "ÏÖÔÚÉúÃüÖµÊÇ" << player.currentHealth << 
+        "µã£¬¹¥»÷Á¦ÊÇ£º" << player.attack <<
+        "µã£¬·ÀÓùÁ¦ÊÇ£º" << player.defense << endl;
     }
     room->clearLoot();
 }
 void Dungeon::handleChestRoom(Room * room)
 {
-    cout << "ä½ ä»¬è¿›äº†ä¸€ä¸ªå®ç®±æˆ¿é—´ã€‚\n";
+    cout << "ÄãÃÇ½øÁËÒ»¸ö±¦Ïä·¿¼ä¡£\n";
     string actions[] = {
-        "1ã€ç§»åŠ¨åˆ°å…¶ä»–æˆ¿é—´",
-        "2ã€æ‰“å¼€å®ç®±æ‹¿ä¸œè¥¿â€”â€”ç§»åŠ¨åˆ°å…¶ä»–æˆ¿é—´"
+        "1¡¢ÒÆ¶¯µ½ÆäËû·¿¼ä",
+        "2¡¢´ò¿ª±¦ÏäÄÃ¶«Î÷¡ª¡ªÒÆ¶¯µ½ÆäËû·¿¼ä"
     };
     while(true)
     {
@@ -70,28 +70,28 @@ void Dungeon::handleChestRoom(Room * room)
             return;
         }
         else
-            cout << "ç»™ğŸ‘´å†è¾“å…¥ä¸€é\n";
+            cout << "¸ø?ÔÙÊäÈëÒ»±é\n";
         
     }
 }
 
-/* æ•Œäººæˆ¿é—´çš„å¤„ç†ä»£ç  */
+/* µĞÈË·¿¼äµÄ´¦Àí´úÂë */
 void Dungeon::handleFightActions(GameCharacter * enemy)
 {
     string actions[] = {
-        "1ã€æ™®é€šæ”»å‡»",
-        "2ã€æ’¤é€€â€¦â€¦"
+        "1¡¢ÆÕÍ¨¹¥»÷",
+        "2¡¢³·ÍË¡­¡­"
     };
     while(true)
     {
         printActions(2, actions);
         int input;
         cin >> input;
-        // ç©å®¶åŠ¨ä½œ
+        // Íæ¼Ò¶¯×÷
         if (input == 1)
         {
             int damage = enemy->takeDamage(player.attack);
-            cout << "ä½ ç»™äº†" << enemy->name << damage << "ç‚¹ä¼¤å®³!\n";
+            cout << "Äã¸øÁË" << enemy->name << damage << "µãÉËº¦!\n";
         }
         else if (input == 2)
         {
@@ -100,23 +100,23 @@ void Dungeon::handleFightActions(GameCharacter * enemy)
             return;
         }
         else
-            cout << "çˆªå·´ï¼Œå†é€‰ï¼\n";
+            cout << "×¦°Í£¬ÔÙÑ¡£¡\n";
 
-        // æ£€æµ‹æ•Œäººæ˜¯ä¸æ˜¯æ­»æ‰
+        // ¼ì²âµĞÈËÊÇ²»ÊÇËÀµô
         if(enemy->checkIsDead())
         {
-            cout << "æˆ˜æ–—èƒœåˆ©ï¼ï¼" << enemy->name << "è¢«å‡»è´¥ï¼" << endl;
+            cout << "Õ½¶·Ê¤Àû£¡£¡" << enemy->name << "±»»÷°Ü£¡" << endl;
             player.increaseStats(10, 5, 5);
             player.currentRoom->clearEnemies();
             return;
         }
 
-        // æ²¡æ­»æ‰ä¹‹åå¯¹ç©å®¶çš„æ”»å‡»
+        // Ã»ËÀµôÖ®ºó¶ÔÍæ¼ÒµÄ¹¥»÷
         int damage = player.takeDamage(enemy->attack);
-        cout << enemy->name <<"ç»™ä½ é€ æˆäº†" << damage << "ç‚¹ä¼¤å®³ï¼" << endl;
-        cout << "ç›®å‰å‰©ä½™è¡€é‡ï¼š" << player.currentHealth << endl;
+        cout << enemy->name <<"¸øÄãÔì³ÉÁË" << damage << "µãÉËº¦£¡" << endl;
+        cout << "Ä¿Ç°Ê£ÓàÑªÁ¿£º" << player.currentHealth << endl;
 
-        // å¦‚æœç©å®¶æ­»äº†â€¦â€¦
+        // Èç¹ûÍæ¼ÒËÀÁË¡­¡­
         if (player.checkIsDead())
             return;
         
@@ -126,10 +126,10 @@ void Dungeon::handleFightActions(GameCharacter * enemy)
 void Dungeon::handleEnemyRoom(Room * room)
 {
     GameCharacter enemy = room->enemies.front();
-    cout << "ä½ ä»¬è¿›äº†ä¸€ä¸ªæ•Œäººæˆ¿é—´ã€‚" << enemy.name<< "è¦æ”»è¿‡æ¥äº†ï¼\n";
+    cout << "ÄãÃÇ½øÁËÒ»¸öµĞÈË·¿¼ä¡£" << enemy.name<< "Òª¹¥¹ıÀ´ÁË£¡\n";
     string actions[] = {
-        "1ã€æˆ˜æ–—ï¼",
-        "2ã€æ‰“ä¸è¿‡ï¼Œè¿˜æ˜¯å…ˆæ’¤å›ä¸Šä¸€é—´æˆ¿é—´å§â€¦â€¦"
+        "1¡¢Õ½¶·£¡",
+        "2¡¢´ò²»¹ı£¬»¹ÊÇÏÈ³·»ØÉÏÒ»¼ä·¿¼ä°É¡­¡­"
     };
     while(true)
     {
@@ -145,12 +145,12 @@ void Dungeon::handleEnemyRoom(Room * room)
             return;
         }
         else
-            cout << "çˆªå·´ï¼Œå†é€‰ï¼\n";
+            cout << "×¦°Í£¬ÔÙÑ¡£¡\n";
     }
 }
 
 
-/* è¿›å…¥æˆ¿é—´ */
+/* ½øÈë·¿¼ä */
 void Dungeon::enterRoom(Room *room)
 {
     if (room->enemies.size())
@@ -168,8 +168,8 @@ void Dungeon::handleMovementActions(Room * room)
         if(room->pos == 0)
         {
             string actions[] = {
-                "1ã€å‘å³èµ°",
-                "2ã€å‘ä¸‹èµ°"
+                "1¡¢ÏòÓÒ×ß",
+                "2¡¢ÏòÏÂ×ß"
             };
             printActions(2, actions);
             int input;
@@ -179,24 +179,24 @@ void Dungeon::handleMovementActions(Room * room)
             else if (input == 2)
                 {player.changesRooms(&room[2]); return;}
             else
-                cout << "å†é€‰ï¼ğŸ˜¡" << endl;
+                cout << "ÔÙÑ¡£¡?" << endl;
         }
         else if (room->pos == 1)
         {
-            string actions[] = {"1ã€å‘å·¦èµ°"};
+            string actions[] = {"1¡¢Ïò×ó×ß"};
             printActions(1, actions);
             int input;
             cin >> input;
             if (input == 1)
                 {player.changesRooms(&room[0]); return;}
             else
-                cout << "å†é€‰ï¼ğŸ˜¡" << endl;
+                cout << "ÔÙÑ¡£¡?" << endl;
         }
         else if (room->pos == 2)
         {
             string actions[] = {
-                "1ã€å‘ä¸Šèµ°",
-                "2ã€å‘å³èµ°"
+                "1¡¢ÏòÉÏ×ß",
+                "2¡¢ÏòÓÒ×ß"
             };
             printActions(2, actions);
             int input;
@@ -206,25 +206,25 @@ void Dungeon::handleMovementActions(Room * room)
             else if (input == 2)
                 {player.changesRooms(&room[3]); return;}
             else
-                cout << "å†é€‰ï¼ğŸ˜¡" << endl;
+                cout << "ÔÙÑ¡£¡?" << endl;
         }
         else
         {
-            string actions[] = {"1ã€å‘å·¦èµ°"};
+            string actions[] = {"1¡¢Ïò×ó×ß"};
             printActions(1, actions);
             int input;
             cin >> input;
             if (input == 1)
                 {player.changesRooms(&room[2]); return;}
             else
-                cout << "å†é€‰ï¼ğŸ˜¡" << endl;
+                cout << "ÔÙÑ¡£¡?" << endl;
         }
     }
 }
 
 int Dungeon::performEndGameLogic()
 {
-    string actions[] = {"1ã€æ˜¯","2ã€å¦"};
+    string actions[] = {"1¡¢ÊÇ","2¡¢·ñ"};
     while (true)
     {
         printActions(2, actions);
@@ -235,35 +235,35 @@ int Dungeon::performEndGameLogic()
         else if(input == 2)
             return 0;
         else
-            cout << "ä½ æœ€å¥½å¥½å¥½è¾“å…¥" << endl;
+            cout << "Äã×îºÃ¸ø?ºÃºÃÊäÈë" << endl;
         
     }
     
 
 }
 
-/* æ•´ä¸ªåœ°ç‰¢æˆ¿é—´çš„è¿è½¬ */
+/* Õû¸öµØÀÎ·¿¼äµÄÔË×ª */
  int Dungeon::runDungeon()
  {
-    cout << "æ¬¢è¿æ¥åˆ°è¯¥åœ°ç‰¢ï¼Œå˜»å˜»\n";
+    cout << "»¶Ó­À´µ½¸ÃµØÀÎ£¬ÎûÎû\n";
     player.currentRoom = &rooms[0];
     player.previousRoom = &rooms[0];
     
     while(true)
     {
         enterRoom(player.currentRoom);
-        if (player.checkIsDead)
+        if (player.checkIsDead())
         {
-            cout << "ä½ è¢«æ€äº†ã€‚é‡æ¥å—ï¼Ÿ" << endl;
+            cout << "Äã±»É±ÁË¡£ÖØÀ´Âğ£¿" << endl;
             return performEndGameLogic();
         }
         else
         {
             if (player.currentRoom->isExit)
             {
-                if(player.currentRoom->enemies.size == 0)
+                if(player.currentRoom->enemies.size() == 0)
                 {
-                    cout << "ä½ èµ¢äº†ã€‚å†æ¥ä¸€å±€å—ï¼Ÿ" << endl;
+                    cout << "ÄãÓ®ÁË¡£ÔÙÀ´Ò»¾ÖÂğ£¿" << endl;
                     return performEndGameLogic();
                 }
             }

@@ -12,7 +12,6 @@ public:
     int maxHealth, currentHealth, attack, defense;
 
     GameCharacter(string, int, int, int);
-
     int takeDamage(int);
     bool checkIsDead();
 
