@@ -11,7 +11,7 @@ using namespace std;
 int main()
 {
     // 设置房间内物品
-    Item sword("Sword", 0, 5, 0);
+    Item sword("剑", 0, 5, 0);
 
     // 设置敌人
     GameCharacter enemyA("混混", 10, 3, 3);

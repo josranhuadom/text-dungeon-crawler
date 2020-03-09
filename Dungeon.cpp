@@ -70,7 +70,8 @@ void Dungeon::handleChestRoom(Room * room)
             return;
         }
         else
-            cout << "给?再输入一遍\n";
+            cout << "给爷再输入一遍\n";
+            cout << endl;
         
     }
 }
@@ -119,7 +120,6 @@ void Dungeon::handleFightActions(GameCharacter * enemy)
         // 如果玩家死了……
         if (player.checkIsDead())
             return;
-        
     }
 }
 
@@ -189,7 +189,7 @@ void Dungeon::handleMovementActions(Room * room)
             int input;
             cin >> input;
             if (input == 1)
-                {player.changesRooms(&room[0]); return;}
+                {player.changesRooms(&room[-1]); return;}
             else
                 cout << "再选！?" << endl;
         }
